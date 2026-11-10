@@ -1,0 +1,43 @@
+const { SlashCommandBuilder } = require("discord.js");
+
+const commands = [
+  new SlashCommandBuilder()
+    .setName("create")
+    .setDescription("Create a private-server account"),
+
+  new SlashCommandBuilder()
+    .setName("login")
+    .setDescription("Log into your account"),
+
+  new SlashCommandBuilder()
+    .setName("addvbucks")
+    .setDescription("Owner-only currency command")
+    .addStringOption(o =>
+      o.setName("account").setDescription("Username").setRequired(true))
+    .addIntegerOption(o =>
+      o.setName("amount").setDescription("Amount").setRequired(true).setMinValue(1)),
+
+  new SlashCommandBuilder()
+    .setName("give")
+    .setDescription("Admin-only reward command")
+    .addStringOption(o =>
+      o.setName("account").setDescription("Username").setRequired(true))
+    .addStringOption(o =>
+      o.setName("item").setDescription("Item").setRequired(true))
+    .addIntegerOption(o =>
+      o.setName("quantity").setDescription("Quantity").setRequired(true).setMinValue(1)),
+
+  new SlashCommandBuilder()
+    .setName("server")
+    .setDescription("Choose your region")
+    .addStringOption(o =>
+      o.setName("region")
+        .setDescription("Choose EU or NA")
+        .setRequired(true)
+        .addChoices(
+          { name: "Europe", value: "EU" },
+          { name: "North America", value: "NA" }
+        ))
+].map(command => command.toJSON());
+
+module.exports = { commands };
